@@ -1,0 +1,9 @@
+WIDTH = 1280
+HEIGHT = 720
+
+FPS = 144
+MENU_FONT_SIZE = 20
+MENU_FONT = './img/joystix.ttf'
+SUB_FONT = './img/GreatVibes-Regular.ttf'
+MENU_BUTTON_COLOR = '#bf8040'
+MENU_BUTTON_BORDER = '#604020'
