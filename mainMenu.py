@@ -16,17 +16,17 @@ class MainMenu:
         self.offset_y = self.btn_height//2
         self.about = False
         self.about_text = []
-
-
         self.start_button = MenuButton("START", self.btn_width, self.btn_height, ( self.mid_x - self.offset_x, self.mid_y - 100 ), \
-            (self.mid_x, (self.mid_y - 100 + self.offset_y)), MENU_BUTTON_COLOR, MENU_BUTTON_BORDER, self.display_surface )
+            (self.mid_x, (self.mid_y - 100 + self.offset_y)), pygame.Color(191, 128, 64), MENU_BUTTON_BORDER, self.display_surface )
         self.options_button = MenuButton("OPTIONS", self.btn_width, self.btn_height, ( self.mid_x - self.offset_x, self.mid_y, ), \
             (self.mid_x, (self.mid_y + self.offset_y)), MENU_BUTTON_COLOR, MENU_BUTTON_BORDER, self.display_surface )
         self.about_button = MenuButton("ABOUT", self.btn_width, self.btn_height, ( self.mid_x - self.offset_x, self.mid_y + 100 ), \
             (self.mid_x, (self.mid_y + 100 + self.offset_y)), MENU_BUTTON_COLOR, MENU_BUTTON_BORDER, self.display_surface )
         self.quit_button = MenuButton("QUIT", self.btn_width, self.btn_height, ( self.mid_x - self.offset_x, self.mid_y + 200 ), \
             (self.mid_x, ((self.mid_y) + 200 + self.offset_y)), MENU_BUTTON_COLOR, MENU_BUTTON_BORDER, self.display_surface )
-
+        self.back_button = MenuButton("BACK TO MAIN MENU", self.btn_width*1.5, self.btn_height, ( self.mid_x - ((self.btn_width*1.5)//2), self.mid_y + 150 ), \
+            (self.mid_x, ((self.mid_y) + 150 + self.offset_y)), MENU_BUTTON_COLOR, MENU_BUTTON_BORDER, self.display_surface )
+        self.buttons = (self.start_button, self.options_button, self.about_button, self.quit_button)
 
         for idx, text_line in enumerate(ABOUT):
             about_surf = pygame.font.Font(MENU_FONT, MENU_FONT_SIZE).render(text_line, False, 'black')
@@ -38,16 +38,15 @@ class MainMenu:
 
     def draw(self, keys):
         if not self.about:
-            self.start_button.update()
-            self.options_button.update()
-            self.about_button.update()
-            self.quit_button.update()
+            for button in self.buttons:
+                button.update()
         else:
             self.about_button.clicked = False
             self.about_button.color = MENU_BUTTON_COLOR
             for line in self.about_text:
                 self.display_surface.blit(line[0], line[1])
-            if keys[pygame.K_RETURN]:
+            self.back_button.update()
+            if self.back_button.clicked:
                 self.about = False
 
         ### DRAW TITLE SCREEN
@@ -60,12 +59,13 @@ class MainMenu:
         self.display_surface.blit(subtitle_surf, subtitle_rect)
 
     def start_game(self):
-        self.game_loop()
+        pass
+        # self.game_loop()
 
     def check_clicks(self):
         if self.start_button.clicked == True:
-            self.start == True
-            self.start_game()
+            self.start = True
+            # self.start_game()
         if self.quit_button.clicked == True:
             pygame.quit()
             sys.exit()
@@ -75,7 +75,31 @@ class MainMenu:
 
     def run(self, keys):
         self.check_clicks()
-        self.draw(keys)        
+        self.draw(keys)
 
     def game_loop():
         pass
+
+    def fade_to_black(self, window):
+        r, g, b = (191, 128, 64)
+        r2, g2, b2 = (245, 245, 220)
+        fade = pygame.Surface((self.mid_x*2, self.mid_y*2))
+        fade.fill((0,0,0))
+        for alpha in range(300):
+            if r != 0: r -= 1
+            if g != 0: g -= 1
+            if b != 0: b -= 1
+            if r2 != 0: r2 -= 1
+            if g2 != 0: g2 -= 1
+            if b2 != 0: b2 -= 1
+
+            fade.set_alpha(alpha)
+            window.fill((255,255,255))
+            window.blit(fade, (0,0))
+            for button in self.buttons:
+                button.color = pygame.Color(r, g, b)
+                button.border = pygame.Color(r, g, b)
+                button.font_color = pygame.Color(r2, g2, b2)
+            self.draw([])
+            pygame.display.update()
+            pygame.time.delay(5)

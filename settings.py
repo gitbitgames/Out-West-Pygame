@@ -5,9 +5,9 @@ ABOUT = [
 'independently by Sean Connolly.', '',
 'Sprite assets created by _____. All other assets',
 'are created and owned by Sean Connolly.', '', '',
-'Press Enter to return to the main menu.'
 ]
 
+TILESIZE = 16
 FPS = 144
 MENU_FONT_SIZE = 20
 MENU_FONT = './img/joystix.ttf'

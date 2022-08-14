@@ -6,6 +6,7 @@ class MenuButton:
         self.display_surface = surface
         self.rect = pygame.Rect(pos, (width, height))
         self.font = pygame.font.Font(MENU_FONT, MENU_FONT_SIZE)
+        self.font_color = pygame.Color(245, 245, 220)
         self.color = btn_color
         self.border = border_color
         self.pos = pos
@@ -16,12 +17,11 @@ class MenuButton:
         self.click_timer = 0
         self.current_time = 0
         self.clicked = False
-        self.draw()
 
     def draw(self):
         pygame.draw.rect(self.display_surface, self.border, self.rect.inflate(10, 10), border_radius=12)
         pygame.draw.rect(self.display_surface, self.color, self.rect, border_radius=12)
-        text_surf = self.font.render(self.text, False, 'beige')
+        text_surf = self.font.render(self.text, False, self.font_color)
         text_rect = text_surf.get_rect(center=self.text_pos)
         self.display_surface.blit(text_surf, text_rect)
 
@@ -37,6 +37,7 @@ class MenuButton:
     def check_click(self):
         mouse_pos = pygame.mouse.get_pos()
         if self.rect.collidepoint(mouse_pos):
-            self.color = 'white'
+            if self.text != 'START':
+                self.color = 'white'
             self.click_time = pygame.time.get_ticks()
             self.clicked = True
