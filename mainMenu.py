@@ -33,6 +33,11 @@ class MainMenu:
             about_rect = about_surf.get_rect(center=(self.mid_x, (self.mid_y - 100 + (idx*25) + self.offset_y)))
             self.about_text.append([about_surf, about_rect])
 
+        self.imageSrc1 = pygame.transform.scale(pygame.image.load("./img/Player/movement/down_idle/01.png").convert_alpha(), (500, 500))
+        self.imageSrc2 = pygame.transform.scale(pygame.image.load("./img/Player/tree.png").convert_alpha(), (600, 600))
+        self.imageSrc3 = pygame.transform.scale(pygame.image.load("./img/Player/bush.png").convert_alpha(), (300, 150))
+        self.imageSrc4 = pygame.transform.scale(pygame.image.load("./img/Player/plant.png").convert_alpha(), (100, 100))
+        self.imageSrc5 = pygame.transform.scale(pygame.image.load("./img/Player/plant2.png").convert_alpha(), (100, 100))
         self.start = False
         self.level = Level()
 
@@ -57,10 +62,12 @@ class MainMenu:
 
         self.display_surface.blit(title_surf, title_rect)
         self.display_surface.blit(subtitle_surf, subtitle_rect)
+        self.display_surface.blit(self.imageSrc1, (100,400))
+        self.display_surface.blit(self.imageSrc3, (900,500))
+        self.display_surface.blit(self.imageSrc4, (950,630))
+        self.display_surface.blit(self.imageSrc5, (820, 600))
+        self.display_surface.blit(self.imageSrc2, (860,200))
 
-    def start_game(self):
-        pass
-        # self.game_loop()
 
     def check_clicks(self):
         if self.start_button.clicked == True:
@@ -77,29 +84,25 @@ class MainMenu:
         self.check_clicks()
         self.draw(keys)
 
-    def game_loop():
-        pass
+    # def fade_to_black(self, window):
+    #     r, g, b = (191, 128, 64)
+    #     r2, g2, b2 = (245, 245, 220)
+    #     fade = pygame.Surface((self.mid_x*2, self.mid_y*2))
+    #     fade.fill((0,0,0))
+    #     for alpha in range(300):
+    #         if r != 0: r -= 1
+    #         if g != 0: g -= 1
+    #         if b != 0: b -= 1
+    #         if r2 != 0: r2 -= 1
+    #         if g2 != 0: g2 -= 1
+    #         if b2 != 0: b2 -= 1
 
-    def fade_to_black(self, window):
-        r, g, b = (191, 128, 64)
-        r2, g2, b2 = (245, 245, 220)
-        fade = pygame.Surface((self.mid_x*2, self.mid_y*2))
-        fade.fill((0,0,0))
-        for alpha in range(300):
-            if r != 0: r -= 1
-            if g != 0: g -= 1
-            if b != 0: b -= 1
-            if r2 != 0: r2 -= 1
-            if g2 != 0: g2 -= 1
-            if b2 != 0: b2 -= 1
-
-            fade.set_alpha(alpha)
-            window.fill((255,255,255))
-            window.blit(fade, (0,0))
-            for button in self.buttons:
-                button.color = pygame.Color(r, g, b)
-                button.border = pygame.Color(r, g, b)
-                button.font_color = pygame.Color(r2, g2, b2)
-            self.draw([])
-            pygame.display.update()
-            pygame.time.delay(5)
+    #         fade.set_alpha(alpha)
+    #         window.fill((255,255,255))
+    #         window.blit(fade, (0,0))
+    #         for button in self.buttons:
+    #             button.color = pygame.Color(r, g, b)
+    #             button.border = pygame.Color(r, g, b)
+    #             button.font_color = pygame.Color(r2, g2, b2)
+    #         self.draw([])
+    #         pygame.display.update()

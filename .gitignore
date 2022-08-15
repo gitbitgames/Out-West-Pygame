@@ -1,3 +1,7 @@
 __pycache__/
 .DS_Store
 OLD/
+img/
+test.py
+functions.py
+conditions.py

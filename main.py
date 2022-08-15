@@ -35,23 +35,20 @@ class Game:
     def run(self):
         while True:
             keys = pygame.key.get_pressed()
-            if keys[pygame.K_ESCAPE]:
-                pygame.quit()
-                sys.exit
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    sys.exit()
+            self.check_exit(keys)
             self.screen.fill('beige')
 
             if self.menu.start:
-                self.menu.fade_to_black(self.screen)
+                # self.menu.fade_to_black(self.screen)
                 self.game = GameLoop()
                 while True:
                     keys = pygame.key.get_pressed()
+                    self.screen.fill('beige')
                     self.check_exit(keys)
-                    self.game.run(keys)
-            
+                    self.game.run()
+                    pygame.display.update()
+                    self.clock.tick(FPS)
+        
             self.menu.run(keys)
             
             pygame.display.update()
