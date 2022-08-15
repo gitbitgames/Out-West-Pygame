@@ -1,1 +1,1 @@
-![screenshot]('menu screen'.png)
+![screenshot](menuscreen.png)
