@@ -9,10 +9,10 @@ class Player(Entity):
         super().__init__(groups)
         self.obstacle_sprites = obstacle_sprites
 
-        self.image = pygame.image.load('./img/player.png')
+        self.image = pygame.image.load('./img/Player/wyatt.png')
         self.rect = self.image.get_rect(topleft=pos)
         self.hitbox = self.rect.inflate(0, -26)
-        self.status = 'right_idle'
+        self.status = 'down_idle'
         self.speed = 5
         self.animations = self.import_player_assets()
 
@@ -38,7 +38,7 @@ class Player(Entity):
         }
         for animation in animations.keys():
             full_path = character_path + animation
-            animations[animation] = import_player_folder(full_path)
+            animations[animation] = import_player_folder(full_path, 120, 110)
         return animations
 
     def player_input(self):

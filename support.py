@@ -10,7 +10,7 @@ def import_csv_layout(path):
             terrain_map.append(list(row))
         return terrain_map
 
-def import_player_folder(path):
+def import_player_folder(path, x, y):
     surface_list = []
     paths = []
 
@@ -25,7 +25,7 @@ def import_player_folder(path):
         for element in paths:
             if element[-5:] == 'Store':
                 continue
-            image_surf = pygame.transform.scale(pygame.image.load(element).convert(), (120, 120))
+            image_surf = pygame.transform.scale(pygame.image.load(element).convert(), (x, y))
             surface_list.append(image_surf)
     
     return surface_list

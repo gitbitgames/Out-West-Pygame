@@ -8,4 +8,4 @@ class Tile(pygame.sprite.Group):
         self.image = self.surface
         self.rect = self.image.get_rect( topleft=pos )
         self.hitbox = self.rect.inflate(-15, -30)
-        self.rect.y += 20
+        # self.rect.y += 20

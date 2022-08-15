@@ -45,8 +45,8 @@ class YSortCameraGroup(pygame.sprite.Group):
         self.offset = pygame.math.Vector2()
 
         # create the floor
-        self.floor_surf = pygame.image.load('./img/ground.png').convert()
-        self.floor_rect = self.floor_surf.get_rect(topleft = (0,0))
+        self.floor_surf = pygame.transform.scale(pygame.image.load('./img/OldWest.png').convert(), (13500,4500))
+        self.floor_rect = self.floor_surf.get_rect(topleft = (-7000,-1600))
 
     def custom_draw(self, player):
         self.offset.x = player.rect.centerx - self.half_width

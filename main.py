@@ -5,21 +5,17 @@ from game import GameLoop
 
 class Game:
     def __init__(self):
-        
         ### Pygame initialization
         pygame.init()
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
-
         ### Change to fullscreen
         # self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-
         self.display_surface = pygame.display.get_surface()
-
         self.menu = MainMenu()
         pygame.display.set_caption('Out West')
         self.clock = pygame.time.Clock()
         self.start = False
-
+        self.game = GameLoop()
         # self.sound = pygame.mixer.Sound('./img/Geppetto.mp3')
         # self.sound.play(loops= -1)
 
@@ -37,10 +33,8 @@ class Game:
             keys = pygame.key.get_pressed()
             self.check_exit(keys)
             self.screen.fill('beige')
-
             if self.menu.start:
                 # self.menu.fade_to_black(self.screen)
-                self.game = GameLoop()
                 while True:
                     keys = pygame.key.get_pressed()
                     self.screen.fill('beige')
@@ -48,9 +42,7 @@ class Game:
                     self.game.run()
                     pygame.display.update()
                     self.clock.tick(FPS)
-        
             self.menu.run(keys)
-            
             pygame.display.update()
             self.clock.tick(FPS)
 
