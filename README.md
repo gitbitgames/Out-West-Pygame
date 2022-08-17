@@ -1,1 +1,1 @@
-![screenshot](menuscreen.png)
+![screenshot](mainmenu.png)
